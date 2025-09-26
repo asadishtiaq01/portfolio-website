@@ -14,7 +14,6 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection, darkMo
   const navItems = [
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About' },
-    { id: 'journey', label: 'Journey' },
     { id: 'projects', label: 'Projects' },
     { id: 'experience', label: 'Experience' },
     { id: 'skills', label: 'Skills' },
@@ -24,16 +23,6 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection, darkMo
   const handleNavClick = (sectionId: string) => {
     setActiveSection(sectionId);
     setMobileMenuOpen(false);
-    
-    // Smooth scroll to section
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const offsetTop = element.offsetTop - 80; // Account for fixed header
-      window.scrollTo({
-        top: offsetTop,
-        behavior: 'smooth',
-      });
-    }
   };
 
   return (
@@ -50,8 +39,9 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection, darkMo
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
             {navItems.map((item) => (
-              <button
+              <a
                 key={item.id}
+                href={`#${item.id}`}
                 onClick={() => handleNavClick(item.id)}
                 className={`px-3 py-2 text-sm font-medium transition-colors duration-200 ${
                   activeSection === item.id
@@ -60,7 +50,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection, darkMo
                 }`}
               >
                 {item.label}
-              </button>
+              </a>
             ))}
           </nav>
 
@@ -88,8 +78,9 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection, darkMo
           <div className="md:hidden py-4 border-t border-gray-200 dark:border-gray-700">
             <nav className="flex flex-col space-y-2">
               {navItems.map((item) => (
-                <button
+                <a
                   key={item.id}
+                  href={`#${item.id}`}
                   onClick={() => handleNavClick(item.id)}
                   className={`px-3 py-2 text-left text-sm font-medium transition-colors duration-200 ${
                     activeSection === item.id
@@ -98,7 +89,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection, darkMo
                   }`}
                 >
                   {item.label}
-                </button>
+                </a>
               ))}
             </nav>
           </div>

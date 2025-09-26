@@ -38,7 +38,7 @@ function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'about', 'journey', 'projects', 'experience', 'skills', 'education'];
+      const sections = ['home', 'about', 'projects', 'experience', 'skills', 'education'];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -59,22 +59,15 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const offsetTop = element.offsetTop - 80; // Account for fixed header
-      window.scrollTo({
-        top: offsetTop,
-        behavior: 'smooth',
-      });
-    }
-  };
-
+  // Remove custom programmatic scrolling; rely on default anchor behavior with CSS scroll padding
+  // Scroll to section on initial load if URL has a hash just to sync active state
   useEffect(() => {
-    if (activeSection !== 'home') {
-      scrollToSection(activeSection);
+    const hash = window.location.hash;
+    if (hash) {
+      const id = hash.slice(1);
+      setActiveSection(id);
     }
-  }, [activeSection]);
+  }, []);
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
@@ -86,35 +79,36 @@ function App() {
       />
       
       <main>
-        <section id="home">
+        <section id="home" className="scroll-mt-24">
           <Hero />
         </section>
         
-        <section id="about">
+        <section id="about" className="scroll-mt-24">
           <About />
         </section>
         
-        <section id="journey">
+        {/* Journey section kept in page but not linked in navbar; remove id to avoid hash conflicts */}
+        <section>
           <ProfessionalJourney />
         </section>
         
-        <section id="projects">
+        <section id="projects" className="scroll-mt-24">
           <Projects />
         </section>
         
-        <section id="experience">
+        <section id="experience" className="scroll-mt-24">
           <ProfessionalExperience />
         </section>
         
-        <section id="skills">
+        <section id="skills" className="scroll-mt-24">
           <Skills />
         </section>
         
-        <section id="education">
+        <section id="education" className="scroll-mt-24">
           <Education />
         </section>
       </main>
-      
+
       <Footer />
       <ScrollToTop />
     </div>
