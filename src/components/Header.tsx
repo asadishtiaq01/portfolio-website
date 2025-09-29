@@ -18,6 +18,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection, darkMo
     { id: 'experience', label: 'Experience' },
     { id: 'skills', label: 'Skills' },
     { id: 'education', label: 'Education' },
+    { id: 'case-studies', label: 'Case Studies' },
   ];
 
   const handleNavClick = (sectionId: string) => {

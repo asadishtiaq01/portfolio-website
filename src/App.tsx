@@ -7,6 +7,7 @@ import Projects from './components/Projects';
 import ProfessionalExperience from './components/ProfessionalExperience';
 import Skills from './components/Skills';
 import Education from './components/Education';
+import CaseStudy from './components/CaseStudy';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 
@@ -106,6 +107,10 @@ function App() {
         
         <section id="education" className="scroll-mt-24">
           <Education />
+        </section>
+        
+        <section id="case-studies" className="scroll-mt-24">
+          <CaseStudy />
         </section>
       </main>
 
